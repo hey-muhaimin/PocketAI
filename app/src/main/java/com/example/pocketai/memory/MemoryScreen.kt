@@ -174,7 +174,7 @@ private fun MemorySearchView(
                             .padding(end = 8.dp)
                     )
                     Text(
-                        text = "pocketai  /  memory",
+                        text = "pocketloop  /  memory",
                         color = PocketMuted,
                         fontSize = 12.sp,
                         fontFamily = IbmPlexMono
@@ -467,7 +467,7 @@ private fun MemoryAnswerView(
                             .padding(end = 12.dp)
                     )
                     Text(
-                        text = "pocketai  /  memory",
+                        text = "pocketloop  /  memory",
                         color = PocketMuted,
                         fontSize = 12.sp,
                         fontFamily = IbmPlexMono
@@ -818,7 +818,7 @@ private fun MemorySourcesView(
                             .padding(end = 8.dp)
                     )
                     Text(
-                        text = "pocketai  /  memory",
+                        text = "pocketloop  /  memory",
                         color = PocketMuted,
                         fontSize = 12.sp,
                         fontFamily = IbmPlexMono

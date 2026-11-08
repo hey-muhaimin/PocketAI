@@ -42,7 +42,7 @@ class AuditChainRepository {
         val paramsHash = AuditLogEntity.sha256(params)
         val riskLevel = RiskLevel.LOW.name
         val status = "INITIALIZED"
-        val resultSummary = "PocketAI Trust & Audit Subsystem Initialized"
+        val resultSummary = "PocketLoop Trust & Audit Subsystem Initialized"
         val resultHash = AuditLogEntity.sha256(resultSummary)
         val prevHash = AuditLogEntity.GENESIS_PREV_HASH
 

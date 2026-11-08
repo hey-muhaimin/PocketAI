@@ -32,7 +32,7 @@ import com.example.ui.theme.MyApplicationTheme
 import com.example.ui.theme.PocketBg
 
 /**
- * PocketAI Main Launcher Activity hosting the unified suite hub.
+ * PocketLoop Main Launcher Activity hosting the unified suite hub.
  */
 class MainActivity : ComponentActivity() {
 

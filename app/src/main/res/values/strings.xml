@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">PocketAI</string>
+    <string name="app_name">PocketLoop</string>
     <string name="nav_hub">Suite Hub</string>
     <string name="nav_memory">Memory</string>
     <string name="nav_guardian">Guardian</string>

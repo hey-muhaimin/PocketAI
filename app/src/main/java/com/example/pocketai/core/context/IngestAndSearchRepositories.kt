@@ -152,10 +152,10 @@ class IngestRepository(
     suspend fun seedSampleDocumentsIfEmpty() = withContext(Dispatchers.IO) {
         if (memoryDao.getDocumentCount() == 0) {
             ingestText(
-                title = "PocketAI Architecture Spec.md",
+                title = "PocketLoop Architecture Spec.md",
                 uri = "asset://internal/spec.md",
                 content = """
-                    PocketAI is an on-device private AI runtime built for Android devices.
+                    PocketLoop is an on-device private AI runtime built for Android devices.
                     Key Principles:
                     1. Zero Telemetry Leakage: Sensitive operations and document contexts are confined to local execution.
                     2. Hybrid Search: Uses SQLite FTS4 virtual tables for keyword exact matches and 256-dimensional feature hashing for semantic dense vector representations, merged using Reciprocal Rank Fusion (RRF k=60).
@@ -287,7 +287,7 @@ class SearchRepository(
         // Enforce isSensitive = true: Document content NEVER leaves the device
         val request = LlmRequest(
             prompt = contextPrompt,
-            systemPrompt = "You are PocketAI Memory Assistant. Answer questions based on provided documents with precise citations.",
+            systemPrompt = "You are PocketLoop Memory Assistant. Answer questions based on provided documents with precise citations.",
             isSensitive = true
         )
 

@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.provider.AlarmClock
 import android.provider.Telephony
 import android.view.accessibility.AccessibilityManager
+import com.example.pocketai.data.AppDocumentDatabase
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -17,6 +18,9 @@ import java.io.File
 import kotlin.system.measureTimeMillis
 
 class LocalMcpRouter(private val appContext: Context) {
+
+    private val db = AppDocumentDatabase.getInstance(appContext)
+    private val documentDao = db.documentDao()
 
     private val _telemetryState = MutableStateFlow(TelemetryLog(durationMs = 0L, tokensProcessed = 0))
     val telemetryState: StateFlow<TelemetryLog> = _telemetryState.asStateFlow()
@@ -99,15 +103,29 @@ class LocalMcpRouter(private val appContext: Context) {
         }
     }
 
-    private fun performLocalWorkspaceFileSearch(query: String): String {
-        val rootDir = appContext.filesDir
-        var matchCounter = 0
-        rootDir.walkTopDown().forEach { file ->
-            if (file.isFile && (file.extension == "md" || file.extension == "txt")) {
-                if (file.readText().contains(query, ignoreCase = true)) matchCounter++
+    /**
+     * Production Index Search: Replaces the basic line-by-line file scan loop 
+     * with a high-speed SQLite FTS4 virtual index lookup match configuration.
+     */
+    private suspend fun performLocalWorkspaceFileSearch(query: String): String {
+        // Ensure documents are seeded if empty
+        runCatching {
+            if (documentDao.countDocuments() == 0) {
+                AppDocumentDatabase.seedDefaultDocuments(documentDao)
             }
         }
-        return "Found $matchCounter matches across custom local text logs for query: \"$query\""
+
+        // Format the text string into a clean SQLite match pattern
+        val sanitizedQuery = query.trim().replace(Regex("[^a-zA-Z0-9 ]"), "") + "*"
+        if (sanitizedQuery.isEmpty() || sanitizedQuery == "*") return "Empty search parameter specified."
+
+        val matchedFileNames = documentDao.searchIndexedDocuments(sanitizedQuery)
+
+        return if (matchedFileNames.isNotEmpty()) {
+            "Found context matches across ${matchedFileNames.size} indexed local documents: [${matchedFileNames.joinToString(", ")}]"
+        } else {
+            "Zero indexing matches flagged across sandboxed file systems for query: \"$query\""
+        }
     }
 
     /**

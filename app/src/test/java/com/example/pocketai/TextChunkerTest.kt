@@ -17,7 +17,7 @@ class TextChunkerTest {
     @Test
     fun testShortTextSingleChunk() {
         val chunker = TextChunker(windowSizeWords = 20, overlapWords = 5)
-        val text = "PocketAI is an on-device private AI runtime for Android."
+        val text = "PocketLoop is an on-device private AI runtime for Android."
         val chunks = chunker.chunk(text)
 
         assertEquals(1, chunks.size)

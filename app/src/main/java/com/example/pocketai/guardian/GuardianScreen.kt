@@ -150,7 +150,7 @@ private fun GuardianOverviewView(
                     .padding(end = 8.dp)
             )
             Text(
-                text = "pocketai  /  guardian",
+                text = "pocketloop  /  guardian",
                 color = PocketMuted,
                 fontSize = 12.sp,
                 fontFamily = IbmPlexMono
@@ -339,7 +339,7 @@ private fun GuardianAppsListView(
                     .padding(end = 8.dp)
             )
             Text(
-                text = "pocketai  /  guardian",
+                text = "pocketloop  /  guardian",
                 color = PocketMuted,
                 fontSize = 12.sp,
                 fontFamily = IbmPlexMono
@@ -556,7 +556,7 @@ private fun GuardianAppDetailView(
                             .padding(end = 12.dp)
                     )
                     Text(
-                        text = "pocketai  /  guardian",
+                        text = "pocketloop  /  guardian",
                         color = PocketMuted,
                         fontSize = 12.sp,
                         fontFamily = IbmPlexMono

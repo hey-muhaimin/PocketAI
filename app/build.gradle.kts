@@ -153,3 +153,27 @@ dependencies {
   "ksp"(libs.androidx.room.compiler)
   "ksp"(libs.moshi.kotlin.codegen)
 }
+
+val exportedBuildsDir = rootProject.layout.projectDirectory.dir("exported-builds")
+
+tasks.register<Copy>("exportDebugApk") {
+  dependsOn("assembleDebug")
+
+  from(layout.buildDirectory.dir("outputs/apk/debug"))
+  include("app-debug.apk")
+
+  into(exportedBuildsDir)
+
+  rename { "PocketLoop-OnDeviceAgent-Debug.apk" }
+
+  val destinationPath = exportedBuildsDir.file("PocketLoop-OnDeviceAgent-Debug.apk").asFile.path
+
+  doLast {
+    println("==========================================================================")
+    println(" POCKETLOOP EXPORT COMPLETE")
+    println(" Target Sideload Binary Saved Directly To Path:")
+    println(" $destinationPath")
+    println("==========================================================================")
+  }
+}
+

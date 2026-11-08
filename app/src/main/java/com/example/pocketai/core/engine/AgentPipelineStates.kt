@@ -3,7 +3,7 @@ package com.example.pocketai.core.engine
 import java.util.UUID
 
 /**
- * Execution and authorization status of a tool in the Hermes loop.
+ * Execution and authorization status of a tool in the PocketLoop engine.
  */
 enum class ToolStatus(val label: String) {
     AWAITING_CONFIRMATION("awaiting"),

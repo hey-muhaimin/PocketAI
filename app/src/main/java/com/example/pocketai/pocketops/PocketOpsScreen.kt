@@ -190,7 +190,7 @@ private fun PocketOpsChatView(
                 )
 
                 Text(
-                    text = "pocketai  /  ops",
+                    text = "pocketloop  /  ops",
                     color = PocketMuted,
                     fontSize = 12.sp,
                     fontFamily = IbmPlexMono
@@ -561,7 +561,7 @@ private fun PocketOpsSessionsView(
                             .padding(end = 8.dp)
                     )
                     Text(
-                        text = "pocketai  /  ops",
+                        text = "pocketloop  /  ops",
                         color = PocketMuted,
                         fontSize = 12.sp,
                         fontFamily = IbmPlexMono
@@ -711,7 +711,7 @@ private fun PocketOpsScopesView(
                     .padding(end = 8.dp)
             )
             Text(
-                text = "pocketai  /  ops",
+                text = "pocketloop  /  ops",
                 color = PocketMuted,
                 fontSize = 12.sp,
                 fontFamily = IbmPlexMono
@@ -936,7 +936,7 @@ private fun PocketOpsAuditView(
                             .padding(end = 8.dp)
                     )
                     Text(
-                        text = "pocketai  /  ops",
+                        text = "pocketloop  /  ops",
                         color = PocketMuted,
                         fontSize = 12.sp,
                         fontFamily = IbmPlexMono

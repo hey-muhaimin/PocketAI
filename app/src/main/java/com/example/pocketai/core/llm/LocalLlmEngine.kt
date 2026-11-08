@@ -88,7 +88,7 @@ class LocalLlmEngine : LlmEngine {
             calls.add(
                 LlmToolCall(
                     name = "set_alarm",
-                    argumentsJson = """{"hour": $hour, "minute": $minute, "message": "PocketAI Alarm"}"""
+                    argumentsJson = """{"hour": $hour, "minute": $minute, "message": "PocketLoop Alarm"}"""
                 )
             )
         }

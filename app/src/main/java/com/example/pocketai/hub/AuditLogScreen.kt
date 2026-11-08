@@ -85,7 +85,7 @@ fun AuditLogScreen(
                             .padding(end = 8.dp)
                     )
                     Text(
-                        text = "pocketai  /  ops",
+                        text = "pocketloop  /  ops",
                         color = PocketMuted,
                         fontSize = 12.sp,
                         fontFamily = IbmPlexMono

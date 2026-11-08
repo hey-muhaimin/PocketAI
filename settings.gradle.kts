@@ -22,6 +22,6 @@ dependencyResolutionManagement {
   }
 }
 
-rootProject.name = "PocketAI"
+rootProject.name = "PocketLoop"
 
 include(":app")

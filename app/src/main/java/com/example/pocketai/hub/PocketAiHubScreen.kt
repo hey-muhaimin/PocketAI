@@ -187,14 +187,14 @@ private fun HubDashboard(
         ) {
             Column {
                 Text(
-                    text = "pocketai  /  suite",
+                    text = "pocketloop  /  suite",
                     color = PocketMuted,
                     fontSize = 12.sp,
                     fontFamily = IbmPlexMono
                 )
                 Spacer(modifier = Modifier.height(2.dp))
                 Text(
-                    text = "PocketAI",
+                    text = "PocketLoop",
                     color = PocketText,
                     fontSize = 20.sp,
                     fontWeight = FontWeight.Bold,
@@ -252,7 +252,7 @@ private fun HubDashboard(
                 )
 
                 Text(
-                    text = "Hermes Agent Core Loop & On-Device RAG",
+                    text = "PocketLoop Agent Core Loop & On-Device RAG",
                     color = PocketText,
                     fontSize = 14.sp,
                     fontWeight = FontWeight.Bold,
@@ -322,7 +322,7 @@ private fun HubDashboard(
         // App 3: PocketOps
         AppEntryCard(
             title = "3. PocketOps (:app-pocketops)",
-            tag = "HERMES AGENT",
+            tag = "POCKETLOOP AGENT",
             description = "Conversational operations planner with streaming thought tokens, <tool_call> JSON parsing, deny-by-default allowlist, and guarded execution.",
             onClick = { onNavigate(PocketAiDestination.POCKETOPS) }
         )

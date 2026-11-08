@@ -35,7 +35,7 @@ class SetAlarmTool(private val context: Context) : Tool {
             val json = JSONObject(parametersJson)
             val hour = json.getInt("hour")
             val minute = json.getInt("minute")
-            val message = json.optString("message", "PocketAI Alarm")
+            val message = json.optString("message", "PocketLoop Alarm")
 
             val intent = Intent(AlarmClock.ACTION_SET_ALARM).apply {
                 putExtra(AlarmClock.EXTRA_HOUR, hour)
