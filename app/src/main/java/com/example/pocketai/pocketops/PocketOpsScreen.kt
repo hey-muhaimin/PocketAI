@@ -161,9 +161,10 @@ private fun PocketOpsChatView(
     var inputText by remember { mutableStateOf("") }
     val listState = rememberLazyListState()
 
-    LaunchedEffect(state.messages.size) {
-        if (state.messages.isNotEmpty()) {
-            listState.animateScrollToItem(state.messages.size - 1)
+    LaunchedEffect(state.messages.size, state.streamingThinkingText) {
+        val targetIndex = state.messages.size + if (state.isPlanning || state.isStreamingTokens) 1 else 0
+        if (targetIndex > 0) {
+            listState.animateScrollToItem(targetIndex - 1)
         }
     }
 
@@ -253,24 +254,54 @@ private fun PocketOpsChatView(
                 }
             }
 
-            if (state.isPlanning) {
+            if (state.isPlanning || state.isStreamingTokens) {
                 item {
-                    Row(
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.padding(vertical = 6.dp)
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(vertical = 4.dp),
+                        verticalArrangement = Arrangement.spacedBy(6.dp)
                     ) {
-                        CircularProgressIndicator(
-                            color = PocketAccent,
-                            modifier = Modifier.size(14.dp),
-                            strokeWidth = 2.dp
-                        )
-                        Spacer(modifier = Modifier.width(8.dp))
-                        Text(
-                            text = "evaluating local intent & trust policy...",
-                            color = PocketMuted,
-                            fontSize = 12.sp,
-                            fontFamily = IbmPlexMono
-                        )
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Box(
+                                modifier = Modifier
+                                    .size(6.dp)
+                                    .background(PocketSuccess, CircleShape)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = "thinking...",
+                                color = PocketSuccess,
+                                fontSize = 11.sp,
+                                fontWeight = FontWeight.SemiBold,
+                                fontFamily = IbmPlexMono
+                            )
+                        }
+
+                        if (!state.streamingThinkingText.isNullOrEmpty()) {
+                            Text(
+                                text = "${state.streamingThinkingText}▌",
+                                color = PocketMuted,
+                                fontSize = 13.sp,
+                                lineHeight = 19.sp,
+                                fontFamily = IbmPlexMono
+                            )
+                        } else {
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                CircularProgressIndicator(
+                                    color = PocketAccent,
+                                    modifier = Modifier.size(12.dp),
+                                    strokeWidth = 1.5.dp
+                                )
+                                Spacer(modifier = Modifier.width(8.dp))
+                                Text(
+                                    text = "evaluating local intent & trust policy...",
+                                    color = PocketMuted,
+                                    fontSize = 12.sp,
+                                    fontFamily = IbmPlexMono
+                                )
+                            }
+                        }
                     }
                 }
             }

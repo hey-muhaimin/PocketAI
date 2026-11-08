@@ -18,6 +18,7 @@ import com.example.pocketai.core.llm.LlmToolCall
 import com.example.pocketai.core.trust.AuditChainRepository
 import com.example.pocketai.core.trust.AuditLogEntity
 import com.example.pocketai.core.trust.RiskLevel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -83,6 +84,8 @@ data class PocketOpsUiState(
     val sessions: List<SessionItem> = emptyList(),
     val messages: List<OpsChatMessage> = emptyList(),
     val isPlanning: Boolean = false,
+    val isStreamingTokens: Boolean = false,
+    val streamingThinkingText: String? = null,
     val pendingConfirmation: PendingActionConfirmation? = null,
     val activeEngine: String = "local qwen2.5-3b",
     val bytesSent: String = "0 B sent",
@@ -309,15 +312,29 @@ class PocketOpsViewModel(
 
                 val parsedPlan = PlanParser.parse(response.content, response.toolCalls)
 
-                if (parsedPlan.explanation.isNotBlank()) {
-                    val agentReply = OpsChatMessage(
-                        sender = "agent",
-                        text = parsedPlan.explanation
-                    )
+                // Live token streaming animation of the thinking/explanation
+                val thinkingText = parsedPlan.explanation.ifBlank { "Evaluating intent, verifying trust policy, and preparing action plan..." }
+                _uiState.value = _uiState.value.copy(isStreamingTokens = true)
+                
+                val chunkSize = 3
+                for (i in 0 until thinkingText.length step chunkSize) {
+                    val end = minOf(i + chunkSize, thinkingText.length)
                     _uiState.value = _uiState.value.copy(
-                        messages = _uiState.value.messages + agentReply
+                        streamingThinkingText = thinkingText.substring(0, end)
                     )
+                    delay(18) // Cadence matching live token generation
                 }
+                delay(60)
+
+                val agentReply = OpsChatMessage(
+                    sender = "agent",
+                    text = thinkingText
+                )
+                _uiState.value = _uiState.value.copy(
+                    messages = _uiState.value.messages + agentReply,
+                    streamingThinkingText = null,
+                    isStreamingTokens = false
+                )
 
                 if (parsedPlan.toolCalls.isNotEmpty()) {
                     executeToolCallsSequentially(parsedPlan.toolCalls)
