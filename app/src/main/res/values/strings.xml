@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">PocketAI</string>
+    <string name="nav_hub">Suite Hub</string>
+    <string name="nav_memory">Memory</string>
+    <string name="nav_guardian">Guardian</string>
+    <string name="nav_pocketops">PocketOps</string>
+    <string name="nav_settings">Settings</string>
+    <string name="nav_audit">Audit Log</string>
+</resources>

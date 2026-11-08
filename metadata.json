@@ -1,0 +1,6 @@
+{
+  "name": "PocketAI",
+  "description": "Private, explainable on-device AI suite featuring Memory, Guardian, and PocketOps.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

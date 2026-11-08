@@ -1,0 +1,6 @@
+{
+  "summary":  "Comprehensive architectural and implementation plan for PocketAI: a multi-module native Android suite containing Memory, Guardian, and PocketOps alongside shared core modules (:core:llm, :core:context, :core:trust, :core:actions, :core:ui), Room FTS4 + vector hybrid search with RRF, deterministic permission/service auditor, risk-gated LLM planner with guarded execution, hash-chained tamper-evident audit log, production Gradle scripts, GitHub Actions workflows, and unit tests.",
+  "updatedAt":  "2026-11-07T19:45:22.117616890Z",
+  "requestFeedback":  true,
+  "userFacing":  true
+}
